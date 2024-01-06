@@ -6,7 +6,7 @@ import 'package:lapor_book/components/validators.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => LoginPageState();
+  State<LoginPage> createState() => LoginPageState();
 }
 
 
@@ -95,7 +95,7 @@ Container(
               headerStyle(level: 3, dark: false)),
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          // login();
+          login();
         }
       }),
 )
