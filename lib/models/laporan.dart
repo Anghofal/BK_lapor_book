@@ -13,6 +13,7 @@ class Laporan {
   List<Komentar>? komentar;
 
   Laporan({
+    
     required this.uid,
     required this.docId,
     required this.judul,
