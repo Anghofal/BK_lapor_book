@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lapor_book/components/styles.dart';
 import 'package:lapor_book/models/akun.dart';
+import 'package:lapor_book/pages/dashboard/AllLaporan.dart';
+import 'package:lapor_book/pages/dashboard/MyLaporan.dart';
+import 'package:lapor_book/pages/dashboard/ProfilePage.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -25,6 +28,13 @@ class DashboardFull extends StatefulWidget {
 
 class _DashboardFull extends State<DashboardFull> {
   int _selectedIndex = 0;
+  List<Widget> pages = [];
+
+  void _onItemTapped(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   final _auth = FirebaseAuth.instance;
 final _firestore = FirebaseFirestore.instance;
@@ -75,13 +85,28 @@ void getAkun() async {
 
   bool _isLoading = false;
 
+  void initState(){
+    super.initState();
+    getAkun();
+  }
+
   @override
   Widget build(BuildContext context) {  
+pages = <Widget>[
+  AllLaporan(akun: akun),
+  MyLaporan(akun: akun),
+  Profile(akun: akun),
+];
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         child: Icon(Icons.add, size: 35),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/add',arguments: {
+            'akun':akun
+          });
+        },
       ),
       appBar: AppBar(
         backgroundColor: primaryColor,
@@ -91,7 +116,7 @@ void getAkun() async {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: primaryColor,
         currentIndex: _selectedIndex,
-        //onTap: ,
+        onTap: _onItemTapped,
         selectedItemColor: Colors.white,
         selectedFontSize: 16,
         unselectedItemColor: Colors.grey[800],
@@ -114,7 +139,7 @@ void getAkun() async {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Text('Masih kosong, diisi nanti'),
+          : pages.elementAt(_selectedIndex)
     );
   }
 }

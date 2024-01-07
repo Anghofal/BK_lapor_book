@@ -5,11 +5,7 @@ import 'package:lapor_book/pages/LoginPage.dart';
 import 'package:lapor_book/pages/RegisterPage.dart';
 import 'package:lapor_book/pages/SplashPage.dart';
 import 'package:lapor_book/pages/dashboard/DashboardPage.dart';
-// import 'package:flutter_lapor_book/pages/AddFormPage.dart';
-// import 'package:flutter_lapor_book/pages/dashboard/DashboardPage.dart';
-// import 'package:flutter_lapor_book/pages/DetailPage.dart';
-// import 'package:flutter_lapor_book/pages/LoginPage.dart';
-// import 'package:flutter_lapor_book/pages/RegisterPage.dart';
+import 'package:lapor_book/pages/AddFormPage.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +22,7 @@ main() async {
       '/login': (context) => LoginPage(),
       '/register': (context) => const RegisterPage(),
       '/dashboard': (context) => const DashboardPage(),
-      // '/add': (context) => AddFormPage(),
+      '/add': (context) => AddFormPage(),
       // '/detail': (context) => DetailPage(),
     },
   ));
